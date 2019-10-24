@@ -14,15 +14,38 @@ import {
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import * as serviceWorker from './serviceWorker';
-// Import your reducers and routes here
+
+// import reducers
+import person from './reducers/person/';
+import measurementmeta from './reducers/measurementmeta/';
+import measurement from './reducers/measurement/';
+import location from './reducers/location/';
+import measurementtype from './reducers/measurementtype/';
+import image from './reducers/image/';
+
+
+//import routes
+import personRoutes from './routes/person';
+import measurementmetaRoutes from './routes/measurementmeta';
+import measurementRoutes from './routes/measurement';
+import locationRoutes from './routes/location';
+import measurementtypeRoutes from './routes/measurementtype';
+import imageRoutes from './routes/image';
+
+
 import Welcome from './Welcome';
 
 const history = createBrowserHistory();
 const store = createStore(
   combineReducers({
     router: connectRouter(history),
-    form,
-    /* Add your reducers here */
+      form,
+      person,
+      measurementmeta,
+      measurement,
+      location,
+      measurementtype,
+      image
   }),
   applyMiddleware(routerMiddleware(history), thunk)
 );
@@ -32,7 +55,12 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/" component={Welcome} strict={true} exact={true}/>
-        {/* Add your routes here */}
+        {personRoutes}
+        {measurementmetaRoutes}
+        {measurementRoutes}
+        {locationRoutes}
+        {measurementtypeRoutes}
+        {imageRoutes}
         <Route render={() => <h1>Not Found</h1>} />
       </Switch>
     </ConnectedRouter>
